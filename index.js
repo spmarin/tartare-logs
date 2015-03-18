@@ -22,13 +22,17 @@
 'use strict';
 
 module.exports = {
-  LogWatcher: require('./lib/log-watcher'),
-  watchLog: function(logFilePath, pattern, fieldsNames, opts) {
-    return new module.exports.LogWatcher(logFilePath, pattern, fieldsNames, opts);
+  LogFileWatcher: require('./lib/log-file-watcher'),
+  watchLogFile: function(logFilePath, pattern, fieldsNames, opts) {
+    return new module.exports.LogFileWatcher(logFilePath, pattern, fieldsNames, opts);
+  },
+  LogStreamWatcher: require('./lib/log-stream-watcher'),
+  watchLogStream: function(stream, pattern, fieldsNames, opts) {
+    return new module.exports.LogStreamWatcher(stream, pattern, fieldsNames, opts);
   },
   LogReader: require('./lib/log-reader'),
-  createLogReader: function(logFilePath, pattern, fieldsNames, opts) {
-    return new module.exports.LogReader(logFilePath, pattern, fieldsNames, opts);
+  createLogReader: function(source, pattern, fieldsNames, opts) {
+    return new module.exports.LogReader(source, pattern, fieldsNames, opts);
   },
   resilience: require('./lib/resilience'),
   chai: require('./lib/chai-plugin')
